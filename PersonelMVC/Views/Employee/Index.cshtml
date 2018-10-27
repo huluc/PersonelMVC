@@ -1,0 +1,44 @@
+﻿@model List<PersonelMVC.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href="/Employee/Create" class="btn btn-danger">Yeni</a>
+<h2>Personel Listesi</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th>Soyad</th>   
+            <th>Departman</th>     
+            <th>Maaş</th>
+            <th>Yaş</th>
+            <th>Doğum Tarihi</th>
+            <th>Cinsiyet</th>
+            <th>Evlilik Durumu</th>
+            <th>Güncelle</th>
+            <th>Sil</th>    
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var per in Model)
+        {
+            <tr>
+                <td>@per.Id</td>
+                <td>@per.Name</td>
+                <td>@per.Surname</td>
+                <td>@per.Departmant.Name</td>
+                <td>@per.Salary</td>
+                <td>@(DateTime.Now.Year-per.BirthDate.Year)</td>
+                <td>@per.BirthDate.ToString("dd-MM-yyyy")</td>
+                <td>@(per.Gender==true?"Kadın":"Erkek")</td>
+                <td>@(per.Married == true ? "Evli" : "Bekar")</td>
+                <td><a href="/Employee/Update/@per.Id" class="btn btn-primary">Güncelle</a></td>
+                <td><a href="/Employee/Delete/@per.Id" class="btn btn-primary">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+

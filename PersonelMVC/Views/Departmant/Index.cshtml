@@ -1,0 +1,44 @@
+﻿@using PersonelMVC.Models
+@model List<Departmant>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<a href="/Departmant/Create" class="btn btn-danger">Yeni</a>
+
+<h2>Departman Listesi</h2>
+<table class="table table-bordered" id="tblDepartmants">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+            <th>Personeller</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var dep in Model)
+        {
+            <tr>
+                <td>@dep.Id</td>
+                <td>@dep.Name</td>
+                <td><a href="/Departmant/Update/@dep.Id" class="btn btn-primary">Güncelle</a></td>
+                <td><a class="btn btn-primary btnDelDep" data-id="@dep.Id">Sil</a></td>
+                <td>
+                    @Ajax.ActionLink("Personeller", "GetByDepartmantId", "Employee", new { departmantId = dep.Id }, new AjaxOptions()
+               {
+                   HttpMethod = "GET",
+                   UpdateTargetId = "employees",
+                   InsertionMode = InsertionMode.Replace
+               }, new { @class = "btn btn-primary" })
+                </td>
+            </tr>
+        }
+       
+
+    </tbody>
+</table>
+
+<div id="employees"></div>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<PersonelMVC.Models.Employee>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Maaş</th>
+            <th>Yaş</th>
+            <th>Doğum Tarihi</th>
+            <th>Cinsiyet</th>
+            <th>Evlilik Durumu</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var per in Model)
+        {
+            <tr>
+                <td>@per.Id</td>
+                <td>@per.Name</td>
+                <td>@per.Surname</td>
+                <td>@per.Salary</td>
+                <td>@(DateTime.Now.Year - per.BirthDate.Year)</td>
+                <td>@per.BirthDate.ToString("dd-MM-yyyy")</td>
+                <td>@(per.Gender == true ? "Kadın" : "Erkek")</td>
+                <td>@(per.Married == true ? "Evli" : "Bekar")</td>              
+            </tr>
+        }
+    </tbody>
